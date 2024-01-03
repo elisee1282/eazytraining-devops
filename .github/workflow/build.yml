@@ -1,0 +1,27 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    env:
+      DOCKERFILE_PATH: docker/mini-projet/simple_api/
+      DOCKER_IMAGE: studentlist_api
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Login to Docker Hub
+        run: echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+
+      - name: Build the Docker image
+        run: docker build -t ${{ env.DOCKER_IMAGE }} -f ${{ env.DOCKERFILE_PATH }} .
+
+      - name: Push the Docker image
+        run: docker tag ${{ env.DOCKER_IMAGE }} ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.DOCKER_IMAGE }}:latest
+              docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.DOCKER_IMAGE }}:latest
