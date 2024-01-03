@@ -1,0 +1,21 @@
+version: '3.7'
+services:
+    registry-ui:
+        image: joxit/docker-registry-ui:main
+        restart: always
+        ports:
+        - 8080:80
+        env_file:
+        - .env
+        container_name: registry-ui
+    registry:
+        ports:
+            - 5000:5000
+        restart: always
+        container_name: registry-server
+        volumes:
+            - './data:/var/lib/registry'
+            - './auth:/auth'
+        env_file:
+        - .env
+        image: registry:2

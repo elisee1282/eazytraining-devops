@@ -1,0 +1,28 @@
+version: '3.1'
+services:
+  web:
+    container_name: web
+    image:  php:apache
+    depends_on:
+      - api
+    ports:
+      - "80:80"
+    volumes:
+      - "${PWD}/website:/var/www/html"
+    env_file:
+      - .env
+    networks:
+      - student_list_network
+
+  api:
+    container_name: api
+    image: studentlist_api:v1
+    build: ./simple_api
+    volumes:
+      - "${PWD}/simple_api/student_age.json:/data/student_age.json"
+    networks:
+      - student_list_network
+
+networks:
+  student_list_network:
+    name: student_list_network
