@@ -3,7 +3,7 @@ FROM python:${Version}
 
 LABEL description="Student list dockerfile"
 LABEL maintainer="Ulrich NOUMSI"
-USER me
+
 
 COPY ./student_age.py /
 
