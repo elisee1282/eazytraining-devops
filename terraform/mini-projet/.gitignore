@@ -1,0 +1,8 @@
+# Ignore les fichiers de configuration Terraform
+*.tfstate
+*.tfstate.*
+*.tfvars
+*sun
+
+# Ignore le répertoire .terraform
+.terraform/

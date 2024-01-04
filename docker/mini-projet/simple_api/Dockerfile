@@ -3,11 +3,12 @@ FROM python:${Version}
 
 LABEL description="Student list dockerfile"
 LABEL maintainer="Ulrich NOUMSI"
+USER me
 
 COPY ./student_age.py /
 
 RUN apt update -y \
-    && apt install -y \
+    && apt install curl -y \
         python-dev \
         python3-dev \
         libsasl2-dev \
@@ -25,3 +26,5 @@ EXPOSE 5000
 
 ENTRYPOINT ["python"]
 CMD ["./student_age.py"]
+
+HEALTHCHECK CMD curl --fail http://localhost:5000 || exit 1",
