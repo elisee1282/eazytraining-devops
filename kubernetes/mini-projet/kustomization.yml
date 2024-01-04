@@ -1,0 +1,10 @@
+resources:
+  - wordpress-namespace.yml
+  - mysql-configmap.yml
+  - mysql-secret.yml
+  - mysql-deployment.yml
+  - mysql-services.yml
+  - wordpress-secret.yml
+  - wordpress-configmap.yml
+  - wordpress-deployment.yml
+  - wordpress-services.yml

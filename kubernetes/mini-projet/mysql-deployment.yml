@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-deployment
+  namespace: k8s-projet
+  labels:
+    app: mysql 
+    tier: wordpress
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mysql
+      tier: wordpress
+  template:
+    metadata:
+      labels:
+        app: mysql
+        tier: wordpress
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:8.0
+        volumeMounts:
+        - name: mysql-data
+          mountPath: /var/lib/mysql
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "256Mi"
+          requests:
+            cpu: "200m"
+            memory: "128Mi"
+        ports:
+        - containerPort: 3306
+        env:
+        - name: MYSQL_DATABASE
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-configmap
+              key: db 
+        - name: MYSQL_USER
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-configmap
+              key: user
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-secret
+              key: password
+        - name: MYSQL_RANDOM_ROOT_PASSWORD
+          value: '1'
+      # volumes:
+      # - name: data-volume
+      #   emptyDir:
+      #     sizeLimit: 500Mi
+      volumes:
+      - name: mysql-data
+        hostPath:
+          path: /data/mysql
+        

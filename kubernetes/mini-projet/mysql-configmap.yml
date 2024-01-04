@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: name
+  namespace: k8s-projet
+data:
+  user: wordpress
+  db: wordpress
