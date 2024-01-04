@@ -9,7 +9,7 @@ jobs:
   build-and-push:
     runs-on: ubuntu-latest
     env:
-      DOCKERFILE_PATH: docker/mini-projet/simple_api/
+      DOCKERFILE_PATH: docker/mini-projet/simple_api/Dockerfile
       DOCKER_IMAGE: studentlist_api
 
     steps:
