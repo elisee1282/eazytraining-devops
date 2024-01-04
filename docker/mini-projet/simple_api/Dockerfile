@@ -5,7 +5,7 @@ LABEL description="Student list dockerfile"
 LABEL maintainer="Ulrich NOUMSI"
 
 
-COPY ./student_age.py /
+COPY docker/mini-projet/simple_api/student_age.py /
 
 RUN apt update -y \
     && apt install curl -y \
