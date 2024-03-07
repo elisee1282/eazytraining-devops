@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: name
+  name: mysql-configmap
   namespace: k8s-projet
 data:
   user: wordpress
