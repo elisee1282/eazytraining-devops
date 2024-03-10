@@ -5,5 +5,5 @@ metadata:
   namespace: k8s-projet
 data:
   pma_host: mysql-service
-  pma_port: 3306
+  pma_port: "3306"
   
