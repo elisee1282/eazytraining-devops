@@ -20,20 +20,25 @@ spec:
     spec:
       containers:
       - name: mysql
-        image: mysql:8.0
+        image: mysql:8.3
         volumeMounts:
         - name: mysql-data
           mountPath: /var/lib/mysql
         resources:
           limits:
-            cpu: "500m"
-            memory: "256Mi"
+            cpu: "1000m"
+            memory: "2Gi"
           requests:
-            cpu: "200m"
-            memory: "128Mi"
+            cpu: "1000m"
+            memory: "1Gi"
         ports:
         - containerPort: 3306
         env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: mysql_root_password        
         - name: MYSQL_DATABASE
           valueFrom:
             configMapKeyRef:
@@ -49,8 +54,6 @@ spec:
             secretKeyRef:
               name: mysql-secret
               key: password
-        - name: MYSQL_RANDOM_ROOT_PASSWORD
-          value: '1'
       # volumes:
       # - name: data-volume
       #   emptyDir:
@@ -58,5 +61,5 @@ spec:
       volumes:
       - name: mysql-data
         hostPath:
-          path: /data/mysql
+          path: /mysql-data
         
