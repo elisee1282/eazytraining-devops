@@ -2,4 +2,3 @@ resources:
   - pma-configmap.yml
   - pma-deployment.yml
   - pma-service.yml
-  - pma-ingress.yml
